@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoTrace | Aurora Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <nav class="navbar">
+        <div class="brand-logo">Eco<span class="accent">Trace</span></div>
+        <ul class="nav-links">
+            <li><a href="#dashboard">Dashboard</a></li>
+            <li><a href="#analytics" id="nav-analytics">Analytics</a></li>
+            <li><a href="#reports" id="nav-reports">Reports</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero-section" id="dashboard">
+        <div class="hero-box">
+            <h1>Track Your <span class="accent">Carbon</span> Footprint</h1>
+            <p>Empowering organizations with real-time data governance to achieve zero-emission targets and build a sustainable future.</p>
+            <div class="action-group">
+                <button id="start-btn" class="btn-primary">Start Tracking</button>
+                <button id="learn-btn" class="btn-secondary">Learn More</button>
+            </div>
+            <p id="status-message" class="hidden-msg">Synchronizing global nodes...</p>
+        </div>
+    </header>
+
+    <main id="main-content" class="hidden-content">
+        
+        <section id="analytics-section" class="grid-section">
+            <div class="section-title">
+                <h2>Sustainability <span class="accent">Metrics</span></h2>
+            </div>
+            <div class="grid-container">
+                <div class="grid-card">
+                    <div class="card-glow"></div>
+                    <h3>Emissions Data</h3>
+                    <p>Monitor Scope 1, 2, and 3 emissions across your entire supply chain seamlessly.</p>
+                </div>
+                <div class="grid-card">
+                    <div class="card-glow"></div>
+                    <h3>Resource Optimization</h3>
+                    <p>Track water usage and waste reduction to maximize operational efficiency globally.</p>
+                </div>
+                <div class="grid-card">
+                    <div class="card-glow"></div>
+                    <h3>Energy Transition</h3>
+                    <p>Analyze the shift from fossil fuels to renewable energy grid sources.</p>
+                </div>
+                <div class="grid-card">
+                    <div class="card-glow"></div>
+                    <h3>Compliance Reports</h3>
+                    <p>Automate ESG reporting to align with international regulatory standards.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="reports-section" class="grid-section" style="display: none;">
+            <div class="section-title">
+                <h2>Generated <span class="accent">Reports</span></h2>
+            </div>
+            <div class="grid-container">
+                <div class="grid-card">
+                    <div class="card-glow"></div>
+                    <h3>Q1 2026 ESG Audit</h3>
+                    <p>Comprehensive overview of environmental and governance metrics for the first quarter.</p>
+                    <button class="btn-secondary" style="margin-top: 15px; padding: 8px 16px; font-size: 0.85rem;">Download PDF</button>
+                </div>
+                <div class="grid-card">
+                    <div class="card-glow"></div>
+                    <h3>Annual Carbon Analysis</h3>
+                    <p>Detailed breakdown of emissions verified by third-party compliance auditors.</p>
+                    <button class="btn-secondary" style="margin-top: 15px; padding: 8px 16px; font-size: 0.85rem;">Download PDF</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 EcoTrace. Built for the future.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const startButton = document.getElementById("start-btn");
+            const learnButton = document.getElementById("learn-btn");
+            const mainContent = document.getElementById("main-content");
+            const statusMessage = document.getElementById("status-message");
+
+            // Grab the new sections and links
+            const analyticsSection = document.getElementById("analytics-section");
+            const reportsSection = document.getElementById("reports-section");
+            const navAnalytics = document.getElementById("nav-analytics");
+            const navReports = document.getElementById("nav-reports");
+
+            function revealAndScroll() {
+                mainContent.classList.remove("hidden-content");
+                mainContent.classList.add("show-content");
+                setTimeout(() => {
+                    mainContent.scrollIntoView({ 
+                        behavior: "smooth",
+                        block: "start"
+                    });
+                }, 100);
+            }
+
+            // Dashboard Hero Buttons
+            startButton.addEventListener("click", function() {
+                startButton.innerText = "Active";
+                startButton.classList.add("btn-active");
+                statusMessage.style.display = "block";
+                analyticsSection.style.display = "block"; // Default to analytics view
+                reportsSection.style.display = "none";
+                revealAndScroll();
+            });
+
+            learnButton.addEventListener("click", function() {
+                analyticsSection.style.display = "block";
+                reportsSection.style.display = "none";
+                revealAndScroll();
+            });
+
+            // Top Navigation Click Events (SPA Tab Switching)
+            navAnalytics.addEventListener("click", function(event) {
+                event.preventDefault(); // Stops the page from jumping abruptly
+                revealAndScroll();
+                analyticsSection.style.display = "block"; // Show Analytics
+                reportsSection.style.display = "none";    // Hide Reports
+            });
+
+            navReports.addEventListener("click", function(event) {
+                event.preventDefault();
+                revealAndScroll();
+                analyticsSection.style.display = "none";  // Hide Analytics
+                reportsSection.style.display = "block";   // Show Reports
+            });
+        });
+    </script>
+</body>
+</html>
